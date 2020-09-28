@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <style>
+        *{
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="col-4 mx-auto p-5 ">
+        <a href="{% url 'welcome' %}" class="btn btn-light mb-2">Back</a>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <input type="submit" value="continue" class="btn btn-secondary">
+        </form>
+    </div>
+    
+</body>
+</html>
+

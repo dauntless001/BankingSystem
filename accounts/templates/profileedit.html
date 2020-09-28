@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <form method="POST">
+                {% csrf_token %}
+                {{ user_f | crispy }}
+                {{ acc_f | crispy }}
+                <input type="submit" value="Edit Profile" class="btn btn-secondary">
+            </form>
+        </div>
+    </div>
+
+{%  endblock %}

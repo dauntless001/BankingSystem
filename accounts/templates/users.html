@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row p-2">
+    <h4 class="display-4"><b>Customer's List</b></h4>
+</div>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        First Name
+                    </th>
+                    <th scope="col">
+                        Last Name
+                    </th>
+                    <th scope="col">
+                        Username
+                    </th>
+                    <th scope="col">
+                        Email
+                    </th>
+                    <th scope="col">
+                        Secret No.
+                    </th>
+                    <th scope="col">
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in qs %}
+                <tr>
+                    <td>{{ obj.first_name }}</td>
+                    <td>{{ obj.last_name }}</td>
+                    <td>{{ obj.username }}</td>
+                    <td>{{ obj.email }}</td>
+                    <td>{{ obj.account.sec_num }}</td>
+                    <td>
+                        {% if obj.is_active %}
+                            <a href="" class="btn btn-danger">Deactivate</a>
+                        {% else %}
+                            <a href="" class="btn btn-success">Activate</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    
+</head>
+<body style='background-color : #eee; padding: auto auto;'>
+    <div class="col-3 mx-auto p-5 p-5 text-center">
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'accounts:dashboard' %}" class="btn btn-secondary">DashBoard</a>
+    {% else %}
+    
+        <a href="{% url 'accounts:login' %}" class="btn btn-primary">Login</a>
+        <a href="{% url 'accounts:register' %}" class="btn btn-success">Register</a>
+    {% endif %}
+    </div>
+</body>
+</html>
+

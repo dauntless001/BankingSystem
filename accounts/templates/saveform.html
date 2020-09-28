@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="col-3 mx-auto m-5">
+        <h4 class="lead text-center">Fill the fields Correctly</h4>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="">Amount</label>
+                <input type="number" class="form-control" name='amount'>
+            </div>
+            <div class="form-group">
+                <p><b>Enter this token : {{ token }}</b></p>
+                <label for="">Token</label>
+                <input type="number" class="form-control" name='token'>
+                <input type="hidden" class="form-control" name='parsed_token' value="{{token}}">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-secondary" value="save">
+            </div>
+            
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-6 mx-auto m-5">
+            <div>
+                <span>Full Name</span>
+                <h4 >{{ user_details.user.get_full_name }}</h4>
+            </div>
+            <div>
+                <span>Sec Number</span>
+                <h4 >{{ user_details.user.account.sec_num }}</h4>
+            </div>
+            <div class="row">
+                <a href="{% url 'accounts:transfermoney' %}" class="btn btn-danger m-2">Not this User</a>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row p-0">
+        <div class="col-6 mx-auto">
+            <form method="POST" action="{% url 'accounts:transcomplete' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="">Amount</label>
+                    <input type="number" class="form-control" name='amount'>
+                </div>
+                <div class="form-group">
+                    <p><b>Enter this token : {{ token }}</b></p>
+                    <label for="">Token</label>
+                    <input type="number" class="form-control" name='token'>
+                    <input type="hidden" class="form-control" name='parsed_token' value="{{token}}">
+                    <input type="hidden" class="form-control" name='acc_num' value="{{acc_num}}">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Continue">
+                </div>    
+            </form>
+    </div>
+{% endblock %}

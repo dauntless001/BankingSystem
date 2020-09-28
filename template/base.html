@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+{% load static %}
+{% load humanize %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row" style="height: 100vh;">
+            <div class="col-3 bg-dark p-0">
+                <div class='text-center m-4'>
+                    <img src="{% if user.account.image %}
+                    {{user.account.image.url }} 
+                    {% else %}
+                    {% static 'images/icon.png' %}
+                    {% endif %}
+                    " 
+                    alt="" width="100px" height="100px" class="rounded-circle">
+                </div>
+                <div class="text-center text-light">
+                    <h4>{{ user.username.title }}</h4>
+                </div>
+                <div class="">
+                    <table class="table table-hover table-dark">
+                        <tr >
+                            <td class="p-4 "><a href="{% url 'accounts:dashboard' %}" class="text-light">Dashboard</a></td>
+                        </tr>
+                        <tr >
+                            <td class="p-4"><a href="{% url 'accounts:profile' %}" class="text-light">Profile</a></td>
+                        </tr>
+                        {% if user.is_staff %}
+                        <tr >
+                            <td class="p-4 "><a href="{% url 'accounts:users' %}" class="text-light">Users</a></td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td class="p-4"><a href="{% url 'accounts:passwordChange' %}" class="text-light">Change Password</a></td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 "><a href="{% url 'accounts:report' %}" class="text-light">Report Issue</a></td>
+                        </tr>
+                        <tr>
+                            <td class="p-4"><a href="{% url 'accounts:logout' %}" class="btn btn-danger">Logout</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="row bg-dark pt-2 text-light">
+                    <div class="col-3">
+                        <p>Name: <b>{{ user.get_full_name }}</b></p>
+                    </div>
+                </div>
+                {% for message in messages %}
+                    <div class="row">
+                        <div class=" col-12 alert alert-{{message.tags}} m-0">
+                            <b>{{ message }}</b>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% block content %}
+                <div class="row m-4">
+                    <div class="card p-4 col m-2">
+                        <p class="m-0 p-0"><b>Bal:</b></p>
+                        <p class="display-2">${{ user.account.acc_bal | intcomma }}</p>
+                        <p class="text-right">Secret Number : <b>{{ user.account.sec_num }}</b></p>
+                    </div>
+                    <div class="col-3  ml-auto p-3 m-2 card">
+                        <div class="lead text-right">
+                            <b class="text-primary">History</b>
+                            
+                        </div>
+                        <div>
+                            <p class="lead m-2">View Transaction Histories here</p>
+                            <a href="{% url 'accounts:history' %}" class="btn btn-primary float-right">View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mx-auto">
+                    <div class="col-3 m-3 bg-danger p-3 text-light mx-auto">
+                        <h4>Save Money</h4>
+                        <hr>
+                        <p>Handling Money has never been this easy</p>
+                        <a href="{% url 'accounts:savemoney' %}" class="btn btn-light float-right mt-4">Continue</a>
+                    </div>
+                    <div class="col-3 m-3 bg-primary p-3 text-light mx-auto">
+                        <h4>Transfer Money to a Friend</h4>
+                        <hr>
+                        <p>Handling Money has never been this easy</p>
+                        <a href="{% url 'accounts:transfermoney' %}" class="btn btn-light float-right">Continue</a>
+                    </div>
+                    <div class="col-3 m-3 bg-success p-3 text-light mx-auto">
+                        <h4>Withdraw Money</h4>
+                        <hr>
+                        <p>Easy money Withdrawal to your account</p>
+                        <a href="{% url 'accounts:withdrawmoney' %}" class="btn btn-light float-right mt-4">Continue</a>
+                    </div>
+                </div>
+                {% endblock content %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
