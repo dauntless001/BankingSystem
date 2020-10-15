@@ -8,8 +8,10 @@ from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.core.mail import send_mail
 from .forms import ContactForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/accounts/login')
 def password_change(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -29,12 +31,12 @@ def password_change(request):
     return render(request, name, context)
     
 
-
+# @login_required(login_url='/accounts/login')
 def welcome_view(request):
     name = 'welcome.html'
     return render(request, name)
 
-
+@login_required(login_url='/accounts/login')
 def profile_view(request):
     user = request.user
     name = 'profile.html'
@@ -43,6 +45,8 @@ def profile_view(request):
     }
     return render(request, name)
 
+
+@login_required(login_url='/accounts/login')
 def dashboard(request):
     user = request.user
     name = 'dashboard.html'
@@ -120,6 +124,7 @@ def profile_editview(request):
     if user_f.is_valid and acc_f.is_valid():
         user_f.save()
         acc_f.save()
+        messages.success(request, 'Profile edited successfully')
         return redirect('accounts:dashboard')
     name = 'profileedit.html'
     context = {

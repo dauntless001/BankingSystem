@@ -3,7 +3,9 @@ from django.contrib import messages
 from .models import User, Account, History
 from .forms import AccountForm
 import random
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/accounts/login')
 def savemoney_view(request):
     qs = User.objects.get(username = request.user.username)
     token = random.randint(111111, 999999)
@@ -25,7 +27,7 @@ def savemoney_view(request):
     }
     return render(request, name, context)
 
-
+@login_required(login_url='/accounts/login')
 def withdrawmoney_view(request):
     qs = User.objects.get(username = request.user.username)
     token = random.randint(111111, 999999)
@@ -50,7 +52,7 @@ def withdrawmoney_view(request):
     }
     return render(request, name, context)
 
-
+@login_required(login_url='/accounts/login')
 def transmoney_view(request):
     form = AccountForm(request.POST or None)
     name = 'transfer.html'
@@ -59,6 +61,8 @@ def transmoney_view(request):
     }
     return render(request, name, context)
 
+
+@login_required(login_url='/accounts/login')
 def transverify_view(request):
     if request.method == 'POST':
         account_num = request.POST['account_number']
@@ -80,6 +84,7 @@ def transverify_view(request):
     return render(request, name, context)
 
 
+@login_required(login_url='/accounts/login')
 def transcomplete_view(request):
     if request.method == 'POST':
         account_num = request.POST['acc_num']
@@ -103,6 +108,8 @@ def transcomplete_view(request):
         messages.success(request, f'{amount} transferred successfully')
         return redirect('accounts:dashboard')
 
+
+@login_required(login_url='/accounts/login')
 def transaction_history(request):
     qs = History.objects.filter(user=request.user)
     name = 'history.html'

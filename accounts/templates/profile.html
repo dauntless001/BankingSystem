@@ -21,7 +21,13 @@
                 <br>
                 <div>
                     <h1 class="lead">
-                        <span><b class="float-left">{{ user.username }}</b></span> <span class="float-right"><b>{{ user.account.gender }}</b></span>
+                        <span><b class="float-left">{{ user.username }}</b></span> <span class="float-right">
+                            <b>{% if user.account.gender %}
+                                {{ user.account.gender }}
+                                {% else%}
+                                Gender NA
+                            {% endif %}
+                            </b></span>
                     </h1>
                 </div>
                 <br><br>

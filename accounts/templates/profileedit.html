@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row">
         <div class="col-6 mx-auto">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ user_f | crispy }}
                 {{ acc_f | crispy }}

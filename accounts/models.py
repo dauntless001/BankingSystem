@@ -23,7 +23,7 @@ class Account(models.Model):
     image = models.ImageField(null=True, blank=True, upload_to='images/')
     sec_num = models.IntegerField(default=get_secret_num())
     acc_bal = models.IntegerField(default=0)
-    gender = models.CharField(max_length=20, choices=gender)
+    gender = models.CharField(max_length=20, choices=gender, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -46,3 +46,6 @@ class History(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+

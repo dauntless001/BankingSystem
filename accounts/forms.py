@@ -39,6 +39,7 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email']
 
+
 class AccountEditForm(forms.ModelForm):
     class Meta:
         model = Account
