@@ -11,4 +11,8 @@ Features Include:
 - Change Password
 and Much More...
 
+
+Login Details Include:
+{username: 'dauntless', password : 'dauntless'}
+
 Feel Free to Pull, and use. Thanks
